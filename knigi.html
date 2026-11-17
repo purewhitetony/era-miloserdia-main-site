@@ -17,7 +17,7 @@
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/golos-text-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.css?v=3587ab67">
+<link rel="stylesheet" href="assets/css/style.css?v=752a2253">
 </head>
 <body class="page-knigi">
 <a class="skip" href="#main">К содержанию</a>
@@ -98,8 +98,8 @@
 </header>
 
 <main id="main">
-<section class="hero hero--page">
-  <img class="hero__img" src="assets/img/knigi/ruzov-chitaet.webp" alt="" width="1200" height="643" fetchpriority="high" style="object-position:70% 40%">
+<section class="hero hero--page hero--face">
+  <img class="hero__img" src="assets/img/knigi/hero.webp" alt="" width="1200" height="793" fetchpriority="high">
   <div class="container hero__in">
     <div class="hero__main">
       <nav class="crumbs" aria-label="Вы здесь"><a href="index.html">Главная</a><span aria-hidden="true">/</span><a href="index.html#proekty">Проекты</a><span aria-hidden="true">/</span><span>Книги и библиотеки</span></nav>
@@ -233,7 +233,10 @@
     </div>
     <div class="story__body reveal">
       <figure class="story__photo">
-        <img src="assets/img/knigi/rgb.webp" alt="Комплект книг передают в дар Российской государственной библиотеке" width="1400" height="727" loading="lazy">
+        <picture>
+          <source media="(max-width:620px)" srcset="assets/img/knigi/rgb-left.webp" width="860" height="727">
+          <img src="assets/img/knigi/rgb.webp" alt="Вячеслав Олегович Рузов передаёт комплект книг в дар Российской государственной библиотеке" width="1400" height="727" loading="lazy">
+        </picture>
       </figure>
       <div class="callouts">
         <div class="callout"><b>180+</b><span>библиотек в&nbsp;программе</span></div>
@@ -247,7 +250,7 @@
         <p><strong>Первой библиотекой</strong>, пожелавшей хранить книги Рузова в&nbsp;своём фонде, стала Российская государственная библиотека&nbsp;— главная библиотека страны. За&nbsp;первым подарком последовали другие: книги приняли Российская национальная библиотека в&nbsp;Санкт-Петербурге, Научная библиотека МГУ, библиотека Русского музея, Национальная библиотека Беларуси и&nbsp;Национальная библиотека Республики Татарстан.</p>
       </div>
       <div class="prose reveal" style="--d:.1s">
-        <p><strong>Комплекты получают</strong> и&nbsp;областные библиотеки, и&nbsp;районные, и&nbsp;совсем небольшие сельские. Опыт программы показывает: в&nbsp;небольших городах и&nbsp;сёлах книгам особенно рады и&nbsp;берут их охотнее, чем в&nbsp;мегаполисах.</p>
+        <p><strong>Комплекты получают</strong> и&nbsp;областные библиотеки, и&nbsp;районные, и&nbsp;совсем небольшие сельские. Опыт программы показывает: в&nbsp;небольших городах и&nbsp;сёлах книгам особенно рады.</p>
       </div>
     </div>
 
@@ -426,6 +429,6 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=3587ab67" defer></script>
+<script src="assets/js/main.js?v=752a2253" defer></script>
 </body>
 </html>

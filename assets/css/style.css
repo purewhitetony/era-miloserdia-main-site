@@ -25,7 +25,7 @@
   --ink-900:#232F38;
   --ink-800:#2A3842;
   --text:#2B3943;
-  --muted:#63727C;
+  --muted:#5A6872;
   --line:#E2E7EA;
   --paper:#FFFFFF;
   --warm:#F6F2F0;
@@ -84,6 +84,8 @@ p{text-wrap:pretty}
 /* надзаголовок: мелкие прописные с точкой */
 .eyebrow{display:block;font-size:12.500px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--coral-600);margin-bottom:22px}
 .eyebrow--teal{color:var(--teal-700)}
+/* на тёплом и сером фоне коралловый мелкий текст темнее: иначе контраст ниже нормы */
+.section--warm .eyebrow,.section--cool .eyebrow,.story--light .eyebrow,.hero--plain .eyebrow,.section--warm .format__body small,.chair small{color:var(--coral-700)}
 .eyebrow--light{color:var(--coral-200)}
 
 /* лепесток-апостроф перед заголовком */
@@ -207,19 +209,25 @@ a.glass:hover{background:rgba(255,255,255,.24)}
 .crumbs a:hover{color:#fff}
 .crumbs span[aria-hidden]{opacity:.6}
 
+/* экран с портретом: человек справа, текст занимает левую половину и не заходит на лицо */
+.hero--face .hero__img{object-position:60% 30%}
+@media (min-width:621px){
+  .hero--face .hero__main{max-width:min(46%,560px)}
+  .hero--face .hero__title{font-size:clamp(30px,4.200vw,58px)}
+}
 /* варианты экрана внутренних страниц: светлый без фото, коралловый с иллюстрацией */
 .hero--plain{background:var(--warm);color:var(--text)}
 .hero--plain::after{background:radial-gradient(circle at 100% 100%,var(--coral-100) 0 16%,#FCEDEC 16.100% 23%,#FBF1EF 23.100% 30%,transparent 30.100%)}
 .hero--plain h1{color:var(--ink-900)}
-.hero--plain .hero__lead{color:var(--muted)}
+.hero--plain .hero__lead{color:var(--text)}
 .hero--plain .crumbs{color:var(--muted)}
 .hero--plain .crumbs a{text-decoration-color:var(--line)}
 .hero--plain .crumbs a:hover{color:var(--ink-900)}
 .hero--plain .hero__in{padding-bottom:72px}
-.hero--coral{background:#DC4241}
+.hero--coral{background:var(--coral-600)}
 .hero--coral::after{background:radial-gradient(circle at 82% 108%,rgba(255,255,255,.2) 0 19%,rgba(255,255,255,.12) 19.100% 27%,rgba(255,255,255,.07) 27.100% 35%,transparent 35.100%)}
 .hero--coral .hl{--hl-bg:rgba(255,255,255,.2);--hl-ink:#fff;--hl-line:#fff}
-.hero--coral .crumbs{color:rgba(255,255,255,.88)}
+.hero--coral .crumbs,.hero--coral .hero__lead{color:#fff}
 .hero__art{position:absolute;z-index:-1;right:max(3%,calc(50% - 590px));bottom:-5%;width:min(430px,36%);height:auto;filter:drop-shadow(0 26px 30px rgba(0,0,0,.22))}
 .hero--art .hero__in{padding-right:min(440px,36%)}
 .note{font-size:14.500px;color:var(--muted);line-height:1.5}
@@ -234,7 +242,10 @@ a.glass:hover{background:rgba(255,255,255,.24)}
 .lecture .btn{margin-left:auto;flex:none}
 @media (max-width:980px){
   .hero--art .hero__in{padding-right:0}
-  .hero__art{opacity:.28;width:min(360px,62%);right:-6%}
+  /* на узком экране иллюстрация встаёт под текст целиком, а не просвечивает сквозь него */
+  .hero--art{display:flex;flex-direction:column}
+  .hero--art .hero__in{padding-bottom:12px}
+  .hero__art{position:static;order:2;align-self:center;width:min(260px,62%);margin:0 0 34px}
   .lecture{flex-wrap:wrap}
   .lecture .btn{margin-left:0}
 }
@@ -264,9 +275,9 @@ a.glass:hover{background:rgba(255,255,255,.24)}
 .ring__num{display:grid;place-items:center;width:74px;height:74px;border-radius:50%;border:2px solid var(--coral);font-size:21px;font-weight:600;letter-spacing:-.03em;color:var(--coral-600);flex:none}
 .ring--teal .ring__num{border-color:var(--teal-500);color:var(--teal-700)}
 .ring__text{font-size:14.500px;line-height:1.35;font-weight:600;color:var(--ink-900);max-width:11em}
-.qcard{position:relative;isolation:isolate;border-radius:var(--r-xl);overflow:hidden;min-height:470px;display:flex;align-items:flex-end;color:#fff;box-shadow:var(--shadow-lg)}
-.qcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:38% 50%;z-index:-2}
-.qcard::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(28,40,48,.92) 0%,rgba(28,40,48,.55) 42%,rgba(28,40,48,0) 72%)}
+.qcard{position:relative;isolation:isolate;border-radius:var(--r-xl);overflow:hidden;min-height:560px;display:flex;align-items:flex-end;color:#fff;box-shadow:var(--shadow-lg)}
+.qcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:9% 50%;z-index:-2}
+.qcard::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(28,40,48,.96) 0%,rgba(28,40,48,.92) 30%,rgba(28,40,48,0) 56%)}
 .qcard__in{padding:30px 30px 32px}
 .qcard__quote{font-size:clamp(20px,1.900vw,24px);font-weight:600;line-height:1.26;letter-spacing:-.02em;color:#fff}
 .qcard__sign{display:flex;align-items:center;gap:10px;margin-top:18px;font-size:13.500px;color:rgba(255,255,255,.85)}
@@ -290,6 +301,7 @@ a.glass:hover{background:rgba(255,255,255,.24)}
 .story__text .btn{margin-top:26px}
 .story__body{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:20px;align-items:stretch}
 .story__photo{border-radius:var(--r-md);overflow:hidden;min-height:330px}
+.story__photo picture{display:contents}
 .story__photo img{width:100%;height:100%;object-fit:cover}
 .callouts{display:grid;gap:8px;padding:8px;border-radius:22px;background:var(--teal)}
 .callout{display:grid;align-content:center;justify-items:center;gap:6px;padding:22px 14px;border-radius:15px;background:#fff;color:var(--ink-900);text-align:center}
@@ -320,7 +332,7 @@ a.glass:hover{background:rgba(255,255,255,.24)}
 .banner__btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.18)}
 .banner__link{position:absolute;inset:0;z-index:0}
 .banner__body>*{position:relative;z-index:1}
-.banner--coral{--b-bg:#DC4241;--b-btn:var(--coral-700);--b-glow:rgba(255,255,255,.13)}
+.banner--coral{--b-bg:var(--coral-600);--b-btn:var(--coral-700);--b-glow:rgba(255,255,255,.13)}
 .banner--teal{--b-bg:var(--teal);--b-btn:var(--teal-700);--b-glow:rgba(255,255,255,.3);--b-tag:rgba(35,47,56,.12);--b-photo:.26;color:var(--ink-900)}
 .banner--teal .banner__btn{background:var(--ink);color:#fff}
 .banner--ink{--b-bg:var(--ink);--b-btn:var(--ink-900);--b-glow:rgba(113,210,205,.14);--b-photo:.5}
@@ -362,7 +374,7 @@ a.glass:hover{background:rgba(255,255,255,.24)}
 .cell--cta{background:var(--coral-600);color:#fff;justify-content:center;padding:36px 40px}
 .cell--cta::before{content:"";position:absolute;right:-90px;bottom:-190px;width:480px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.2) 0 40%,transparent 40.300%),radial-gradient(circle,rgba(255,255,255,.12) 0 56%,transparent 56.300%),radial-gradient(circle,rgba(255,255,255,.08) 0 72%,transparent 72.300%);z-index:-1}
 .cell--cta h3{color:#fff;font-size:clamp(25px,2.800vw,36px);max-width:12em;margin-bottom:12px}
-.cell--cta p{color:rgba(255,255,255,.92);font-size:16px;max-width:27em}
+.cell--cta p{color:#fff;font-size:16px;max-width:27em}
 .cell--cta .actions{margin-top:26px}
 .cell--cta .cell__art{position:absolute;right:26px;bottom:14px;width:190px;margin:0;filter:drop-shadow(0 16px 20px rgba(0,0,0,.2))}
 .cell--cta .btn--light{box-shadow:none}
@@ -416,7 +428,9 @@ a.chip:hover{box-shadow:inset 0 0 0 1px var(--teal-700);background:var(--teal-50
 .book:nth-child(even) .book__covers{order:2}
 .book__covers{display:flex;justify-content:center;align-items:flex-end;gap:0;min-height:230px;padding:10px 0}
 .book__covers img{height:clamp(150px,17vw,230px);width:auto;border-radius:3px;box-shadow:0 10px 26px rgba(35,47,56,.24);transition:transform .3s}
-.book__covers--fan img+img{margin-left:-7%}
+/* веер из пяти обложек всегда умещается в свою колонку: ширина в долях колонки, а не в пикселях */
+.book__covers--fan img{width:22.500%;height:auto}
+.book__covers--fan img+img{margin-left:-3.500%}
 .book__covers--fan img:nth-child(odd){transform:translateY(-10px)}
 .book__covers--single img{height:clamp(190px,22vw,290px);box-shadow:none;filter:drop-shadow(0 14px 22px rgba(35,47,56,.24))}
 .book h3{font-size:clamp(23px,2.400vw,31px);margin-bottom:14px}
@@ -541,7 +555,7 @@ a.chip:hover{box-shadow:inset 0 0 0 1px var(--teal-700);background:var(--teal-50
 .cta{position:relative;isolation:isolate;overflow:hidden;border-radius:var(--r-xl);padding:clamp(36px,5.500vw,72px);display:grid;grid-template-columns:minmax(0,1.4fr) auto;gap:28px 48px;align-items:center;background:var(--coral-600);color:#fff}
 .cta::before{content:"";position:absolute;right:-120px;bottom:-250px;width:620px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.2) 0 40%,transparent 40.300%),radial-gradient(circle,rgba(255,255,255,.12) 0 56%,transparent 56.300%),radial-gradient(circle,rgba(255,255,255,.07) 0 72%,transparent 72.300%);z-index:-1}
 .cta h2{color:#fff;font-size:clamp(26px,3.200vw,42px);margin-bottom:12px}
-.cta p{color:rgba(255,255,255,.92);max-width:36em}
+.cta p{color:#fff;max-width:36em}
 .cta .btn--light{box-shadow:none}
 .cta--teal{background:var(--teal);color:var(--ink-900)}
 .cta--teal h2{color:var(--ink-900)}
@@ -626,15 +640,18 @@ a.chip:hover{box-shadow:inset 0 0 0 1px var(--teal-700);background:var(--teal-50
   .hero__in{grid-template-columns:1fr;gap:34px;min-height:0;padding-block:calc(var(--nav-h) + 64px) 150px}
   .hero__side{position:static;flex-direction:column-reverse;align-items:flex-start;gap:16px}
   .hero__trust{justify-items:start;text-align:left}
-  .hero::after{background:linear-gradient(90deg,rgba(28,40,48,.8) 0%,rgba(28,40,48,.5) 60%,rgba(28,40,48,.25) 100%),linear-gradient(0deg,rgba(28,40,48,.7) 0%,rgba(28,40,48,0) 44%)}
+  /* затемнение — только для экранов с фотографией; на светлом и коралловом оно делало текст нечитаемым */
+  .hero:not(.hero--plain):not(.hero--coral)::after{background:linear-gradient(90deg,rgba(28,40,48,.8) 0%,rgba(28,40,48,.5) 60%,rgba(28,40,48,.25) 100%),linear-gradient(0deg,rgba(28,40,48,.7) 0%,rgba(28,40,48,0) 44%)}
   .about{margin-top:-96px}
   .about__grid{grid-template-columns:1fr}
-  .qcard{min-height:360px}
+  .qcard{min-height:500px}
   .section__head{grid-template-columns:1fr}
   .goals__grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:44px}
   .goal:nth-child(odd){padding-left:0;border-left:0}
   .story__head{grid-template-columns:1fr}
   .story__body{grid-template-columns:1fr}
+  .story__photo{min-height:0}
+  .story__photo img{height:auto}
   .callouts{grid-template-columns:repeat(3,minmax(0,1fr))}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cell--tall{grid-row:auto}
@@ -713,9 +730,13 @@ a.chip:hover{box-shadow:inset 0 0 0 1px var(--teal-700);background:var(--teal-50
   .habit p{font-size:13.500px}
   .book__covers img{height:128px}
   .book__covers--fan{min-height:0}
-  .book__covers--fan img{width:23%;height:auto}
-  .book__covers--fan img+img{margin-left:-4%}
   .book__covers--single img{height:190px}
+}
+@media (max-width:620px){
+  /* портрет на телефоне: фото квадратом сверху, лицо видно целиком, текст — ниже на тёмном */
+  .hero--face .hero__img{height:auto;aspect-ratio:1/1;object-position:66% 0}
+  .hero.hero--face:not(.hero--plain):not(.hero--coral)::after{background:linear-gradient(180deg,rgba(28,40,48,.34) 0,rgba(28,40,48,0) 96px,rgba(28,40,48,0) calc(100vw - 176px),var(--ink) calc(100vw - 30px))}
+  .hero--face .hero__in{padding-top:calc(var(--nav-h) + 176px)}
 }
 @media (max-width:420px){
   /* длинные слова заголовков («МИЛОСЕРДИЯ», «Просветительская») должны входить в самый узкий экран */
